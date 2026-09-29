@@ -1,0 +1,949 @@
+/* ===================================
+   3D Portfolio — Global Styles
+   =================================== */
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color Tokens */
+  --color-bg: #050505;
+  --color-surface: rgba(20, 20, 20, 0.45);
+  --color-surface-hover: rgba(30, 30, 30, 0.6);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: rgba(245, 245, 247, 0.6);
+  --color-text-tertiary: rgba(245, 245, 247, 0.35);
+  --color-accent: #a78bfa;
+  --color-accent-glow: rgba(167, 139, 250, 0.25);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  --font-size-hero: clamp(3rem, 8vw, 7rem);
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Effects */
+  --blur-glass: blur(16px);
+  --blur-glass-heavy: blur(24px);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Space Mono', var(--font-family);
+  background: transparent;
+  color: #f0f0f0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200vw;
+  height: 200vh;
+  z-index: 2147483647;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+  background-size: 3px 3px;
+  animation: safeNoiseMove 0.3s steps(3) infinite;
+}
+
+@keyframes safeNoiseMove {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-3px, -3px); }
+  66% { transform: translate(3px, -3px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ===================================
+   Canvas Container (3D Layer)
+   =================================== */
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background: #a9b89c;
+}
+
+/* ===================================
+   Scroll Container (Content Layer)
+   =================================== */
+.scroll-container {
+  position: relative;
+  z-index: 1;
+  min-height: 500vh; /* Allow it to grow naturally with the new timeline margins */
+}
+
+/* ===================================
+   Section Panels (Overlay Content)
+   =================================== */
+.section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(2rem, 6vw, 8rem);
+  pointer-events: none;
+}
+
+/* ===================================
+   Custom Hero Section
+   =================================== */
+.section-hero-custom {
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 5vh;
+  text-align: center;
+}
+
+.hero-content {
+  z-index: 10;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ===================================
+   Unified Timeline (Single Continuous Scroll)
+   =================================== */
+.unified-timeline-container {
+  position: relative;
+  width: 100vw;
+  /* Instead of height: 100vh, we let it flow naturally */
+  padding: 10vh clamp(2rem, 6vw, 8rem);
+  pointer-events: none;
+}
+
+/* Allow clicking buttons inside the timeline */
+.unified-timeline-container .visit-btn {
+  pointer-events: auto;
+}
+
+.timeline-spacing {
+  /* This margin dictates how much physical scroll space happens between timeline items.
+     Roughly 70vh gives a great scrolling sensation where one item disappears as the next arrives. */
+  margin-bottom: 80vh;
+}
+
+.hero-title-brush {
+  font-family: 'Caveat Brush', cursive;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-top: 10vh; /* Push down to avoid face */
+}
+
+.hero-text-cursive {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 800px;
+  line-height: 1.4;
+  margin: 0 auto;
+}
+
+.scroll-prompt {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.4);
+}
+
+/* ===================================
+   Fixed UI Elements
+   =================================== */
+.fixed-ui {
+  position: fixed;
+  z-index: 100;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+  pointer-events: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.top-left {
+  top: 2rem;
+  left: 2rem;
+}
+
+.top-left .name-cn {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.top-left .role {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.65rem;
+}
+
+.top-right {
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.icon-btn, .lang-btn {
+  background: #2a2a2a;
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  transition: opacity 0.2s;
+}
+
+.icon-btn {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.icon-btn:hover, .lang-btn:hover {
+  opacity: 0.8;
+}
+
+.bottom-left {
+  bottom: 2rem;
+  left: 2rem;
+  letter-spacing: 0.15em;
+}
+
+.right-middle {
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+}
+
+.rotated-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4);
+}
+
+.section--right {
+  justify-content: flex-end;
+}
+
+.section--center {
+  justify-content: center;
+  text-align: center;
+}
+
+/* ===================================
+   Glass Card
+   =================================== */
+.glass-card {
+  background: var(--color-surface);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  max-width: 480px;
+  pointer-events: auto;
+  transition: border-color var(--transition-base), background var(--transition-base);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideUp 0.8s ease forwards;
+}
+
+.glass-card:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-surface-hover);
+}
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   Résumé Section
+   =================================== */
+.resume-content {
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideUp 0.8s ease forwards;
+  max-width: 400px;
+  margin-right: 5vw;
+}
+
+.resume-title {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  letter-spacing: 0.03em;
+}
+
+.resume-category {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.15rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+  opacity: 1;
+  font-weight: 700;
+}
+
+.resume-timeline {
+  display: flex;
+  flex-direction: column;
+  /* Reduced gap because we now use margin-bottom on resume-items */
+  gap: 1.5rem; 
+  padding-left: 2rem;
+  position: relative;
+}
+
+/* Continuous vertical line */
+.resume-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem; /* Exactly 0.5rem from left */
+  top: 0.5rem;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.resume-date {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 0.6rem;
+  position: relative;
+}
+
+.resume-date .dot {
+  width: 9px;
+  height: 9px;
+  background-color: #d8c3a5;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 4px rgba(216, 195, 165, 0.5);
+  position: absolute;
+  /* If padding-left is 2rem, the text starts at 2rem. 
+     Line is at 0.5rem. So dot needs to be shifted left by 1.5rem (2rem - 0.5rem).
+     Since dot is 9px (approx 0.56rem) wide, shift by -1.5rem minus half of dot width to center it on the line. */
+  left: -1.78rem; 
+}
+
+.resume-company-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.resume-logo {
+  width: 36px;
+  height: 36px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.resume-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.resume-school {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0;
+  letter-spacing: 0.02em;
+}
+
+.resume-degree {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.resume-bullets {
+  margin-top: 0.8rem;
+  padding-left: 1rem;
+  list-style-type: none;
+}
+
+.resume-bullets li {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.resume-bullets li::before {
+  content: '•';
+  position: absolute;
+  left: -1rem;
+  color: #d8c3a5;
+}
+
+.visit-btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.visit-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+/* ===================================
+   Typography
+   =================================== */
+.hero-title {
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  background: linear-gradient(
+    135deg,
+    var(--color-text-primary) 0%,
+    var(--color-accent) 50%,
+    var(--color-text-primary) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.section-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.section-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+}
+
+.section-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* ===================================
+   Subtle Divider
+   =================================== */
+.divider {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  margin: var(--space-lg) 0;
+  border-radius: 1px;
+}
+
+/* ===================================
+   Tag / Pill
+   =================================== */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.tag {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 100px;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  color: var(--color-accent);
+  transition: all var(--transition-fast);
+}
+
+.tag:hover {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+/* ===================================
+   Loading Screen
+   =================================== */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loading-screen.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: var(--space-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===================================
+   Scroll Indicator
+   =================================== */
+.scroll-indicator {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0.5;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.scroll-indicator.hidden {
+  opacity: 0;
+}
+
+.scroll-indicator-line {
+  width: 1px;
+  height: 32px;
+  background: var(--color-text-secondary);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.5; }
+  50% { transform: scaleY(0.5); opacity: 1; }
+}
+
+.scroll-indicator-text {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-tertiary);
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.social-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+@media (max-width: 768px) {
+  .section {
+    padding: 0 var(--space-lg);
+    align-items: flex-end;
+    padding-bottom: 3rem;
+  }
+
+  .glass-card {
+    max-width: 100%;
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .section-title {
+    font-size: var(--font-size-xl);
+  }
+
+  /* Fixed UI — smaller on mobile */
+  .fixed-ui {
+    font-size: 0.6rem;
+  }
+
+  .top-left {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .top-left .name-cn {
+    font-size: 0.7rem;
+  }
+
+  .top-left .role {
+    font-size: 0.55rem;
+  }
+
+  .top-right {
+    top: 0.8rem;
+    right: 1.5rem;
+  }
+
+  .icon-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .bottom-left {
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 0.55rem;
+  }
+
+  .right-middle {
+    right: 0.8rem;
+  }
+
+  .rotated-text {
+    font-size: 0.55rem;
+  }
+
+  /* Hero */
+  .section-hero-custom {
+    padding-bottom: 0.5rem !important;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .section-hero-custom .hero-content {
+    gap: 0.5rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .section-hero-custom .scroll-prompt {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .hero-title-brush {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin-top: 0;
+  }
+
+  .hero-text-cursive {
+    font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+    padding: 0 0.5rem;
+  }
+
+  .hero-text-cursive br {
+    display: none;
+  }
+
+  .scroll-prompt {
+    font-size: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .scroll-line {
+    height: 25px;
+  }
+
+  /* Timeline */
+  .unified-timeline-container {
+    padding: 5vh 1.2rem;
+  }
+
+  .timeline-spacing {
+    margin-bottom: 50vh;
+  }
+
+  .resume-title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
+    padding-left: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .resume-timeline {
+    padding-left: 1.2rem;
+    gap: 1rem;
+  }
+
+  /* Glass backdrop behind text for readability on mobile */
+  .resume-entry-card {
+    background: rgba(20, 20, 20, 0.5);
+    border-radius: 14px;
+    padding: 1rem 1rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+    max-width: 90%;
+  }
+
+  .resume-entry-card .resume-school {
+    font-size: 0.8rem;
+  }
+
+  .resume-entry-card .resume-degree {
+    font-size: 0.6rem;
+  }
+
+  .resume-entry-card p {
+    font-size: 0.8rem !important;
+  }
+
+  .resume-category {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .resume-school {
+    font-size: 0.85rem;
+  }
+
+  .resume-degree {
+    font-size: 0.65rem;
+  }
+
+  .resume-date {
+    font-size: 0.65rem;
+  }
+
+  .resume-date .dot {
+    width: 7px;
+    height: 7px;
+    min-width: 7px;
+    min-height: 7px;
+    max-width: 7px;
+    max-height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    /* padding-left is 1.2rem (19.2px). Line is at 0.5rem (8px). 
+       Distance is 11.2px. Dot is 7px wide (3.5px half). 
+       Shift = 11.2 + 3.5 = 14.7px */
+    left: -14.7px;
+  }
+
+  .resume-logo {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    aspect-ratio: 1;
+    padding: 4px;
+    border-radius: 6px;
+  }
+
+  .resume-content {
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .resume-bullets li {
+    font-size: 0.75rem;
+  }
+
+  .visit-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.7rem;
+  }
+
+  /* Tech pills */
+  .resume-item span:not(.dot) {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.8rem !important;
+  }
+
+  /* Social buttons */
+  .social-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .social-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Inline description text */
+  .resume-item p {
+    font-size: 0.8rem !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .unified-timeline-container {
+    padding: 4vh 0.8rem;
+  }
+
+  .timeline-spacing {
+    margin-bottom: 40vh;
+  }
+
+  .resume-timeline {
+    padding-left: 1rem;
+  }
+
+  .resume-date .dot {
+    /* padding-left is 1rem (16px). Line is at 0.5rem (8px). 
+       Distance is 8px. Dot is 7px wide (3.5px half). 
+       Shift = 8 + 3.5 = 11.5px */
+    left: -11.5px;
+  }
+
+  .hero-title-brush {
+    font-size: 1.6rem;
+  }
+
+  .hero-text-cursive {
+    font-size: 0.7rem;
+  }
+
+  .resume-category {
+    font-size: 0.75rem;
+  }
+
+  .resume-school {
+    font-size: 0.75rem;
+  }
+
+  .top-left .name-cn {
+    font-size: 0.6rem;
+  }
+
+  .bottom-left {
+    font-size: 0.5rem;
+  }
+}
