@@ -30,10 +30,11 @@ export default function Scene({ onLoaded }) {
     >
       {/* Dramatic diagonal lighting — key from upper-left, front fill to soften shadows */}
       <ambientLight intensity={0.6} />
-      <directionalLight position={[-4, 5, 3]} intensity={3.75} color="#ffe0b2" />
-      <directionalLight position={[0, 0, 8]} intensity={2.1} />
+      <directionalLight position={[-4, 5, 3]} intensity={3.75} color="#ffeeaa" />
+      <directionalLight position={[0, 0, 8]} intensity={1.0} />
       <directionalLight position={[3, 0, 5]} intensity={0.3} />
       <directionalLight position={[2, -1, -2]} intensity={0.4} />
+      <directionalLight position={[6, 1, 2]} intensity={4} color="#ffccaa" />
 
       <Suspense fallback={null}>
         <AvatarModel onLoaded={onLoaded} />
