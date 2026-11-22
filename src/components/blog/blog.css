@@ -1,0 +1,621 @@
+/* ===================================
+   Blog Editorial Styles
+   Clean, plain, minimal reading interface
+   No flickering, no noise overlays
+   =================================== */
+
+/* Root Wrapper */
+.blog-page-root {
+  min-height: 100vh;
+  background-color: #fafafa !important;
+  color: #4b5563 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  position: relative;
+  z-index: 100;
+  width: 100%;
+}
+
+.blog-page-root * {
+  box-sizing: border-box;
+}
+
+/* ===================================
+   Header & Navigation
+   =================================== */
+.blog-header {
+  width: 100%;
+  border-bottom: 1px solid #ebecee;
+  background-color: #fafafa;
+}
+
+.blog-header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog-brand-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #52525b !important;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color 150ms ease;
+}
+
+.blog-brand-link:hover {
+  color: #09090b !important;
+}
+
+.blog-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.blog-nav-link {
+  color: #52525b !important;
+  text-decoration: none;
+  transition: color 150ms ease;
+  padding: 0.2rem 0;
+}
+
+.blog-nav-link:hover {
+  color: #09090b !important;
+  text-decoration: underline;
+}
+
+.blog-nav-link.active {
+  color: #09090b !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-nav-slash {
+  color: #a1a1aa;
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+/* ===================================
+   Main Article Container
+   =================================== */
+.blog-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+.blog-article {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Back Button */
+.blog-back-wrapper {
+  margin-bottom: 2.5rem;
+}
+
+.blog-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  color: #4b5563 !important;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.blog-back-btn:hover {
+  background-color: #f4f4f5;
+  border-color: #d4d4d8;
+  color: #09090b !important;
+}
+
+/* Metadata */
+.blog-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #71717a !important;
+  margin-bottom: 0.75rem;
+}
+
+.blog-meta-dot {
+  color: #a1a1aa;
+  font-size: 0.75rem;
+}
+
+/* Titles */
+.blog-title {
+  font-size: clamp(1.85rem, 3.5vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #1f242d !important;
+  margin-bottom: 0.5rem;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.blog-subtitle {
+  font-family: 'Newsreader', 'Georgia', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #6b7280 !important;
+  margin-bottom: 2.5rem;
+}
+
+/* ===================================
+   Article Content & Typography
+   =================================== */
+.blog-content {
+  font-family: 'Newsreader', 'Charter', 'Source Serif Pro', 'Georgia', serif;
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: #52525b !important;
+}
+
+.blog-content p {
+  color: #52525b !important;
+  margin-bottom: 1.75rem;
+}
+
+.blog-content h2 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #1f242d !important;
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.35;
+}
+
+.blog-content h3 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #2b303a !important;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content strong {
+  font-weight: 700;
+  color: #374151 !important;
+}
+
+.blog-content em {
+  font-style: italic;
+}
+
+.blog-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 3.5rem auto;
+  width: 100%;
+}
+
+.blog-list,
+.blog-ordered-list {
+  margin: 1.5rem 0 2rem 1.75rem;
+  color: #52525b !important;
+}
+
+.blog-list li,
+.blog-ordered-list li {
+  margin-bottom: 0.6rem;
+  padding-left: 0.35rem;
+  color: #52525b !important;
+}
+
+.blog-content code {
+  font-family: 'Space Mono', Consolas, Menlo, monospace;
+  font-size: 0.9em;
+  background-color: #f4f4f5;
+  color: #4b5563 !important;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #e4e4e7;
+}
+
+/* Quotes */
+.blog-quote {
+  border-left: 3px solid #cbd5e1;
+  background-color: #f8fafc;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin: 2rem 0;
+  color: #334155 !important;
+  font-style: normal;
+}
+
+.blog-quote p {
+  color: #334155 !important;
+  margin-bottom: 0.6rem;
+}
+
+.blog-quote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===================================
+   Clean Math Display
+   Matches reference: clean centered formula without borders
+   =================================== */
+.blog-math-container {
+  margin: 2.75rem 0;
+  text-align: center;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.blog-math-container.display-math {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 1.25rem 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.katex-rendered-wrapper {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #1f242d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.katex-rendered-wrapper .katex-display {
+  margin: 0 !important;
+}
+
+.katex-rendered-wrapper .katex {
+  font-size: 1.65rem !important;
+  color: #1f242d !important;
+}
+
+/* ===================================
+   Figures and Illustrations
+   =================================== */
+.blog-figure {
+  margin: 2.75rem 0;
+}
+
+.blog-figure-box {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.blog-figure-box:not(.has-image) {
+  min-height: 200px;
+  background-color: #f4f4f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-figure-box.has-image {
+  min-height: auto;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-figure-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  background-color: #ffffff;
+}
+
+.blog-figure-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.25rem 1rem;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.placeholder-icon {
+  margin-bottom: 0.2rem;
+}
+
+.placeholder-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #52525b;
+  background-color: #e4e4e7;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.placeholder-hint {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.8rem;
+  color: #71717a;
+}
+
+.blog-figcaption {
+  font-family: 'Newsreader', 'Georgia', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #71717a !important;
+  text-align: center;
+  margin-top: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ===================================
+   Code Snippet
+   =================================== */
+.blog-code-container {
+  margin: 2.25rem 0;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.code-lang {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.code-copy-btn {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  color: #475569;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.code-copy-btn:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.blog-code-block {
+  padding: 1.25rem 1.5rem;
+  margin: 0;
+  font-family: 'Space Mono', Consolas, Menlo, monospace;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #1e293b !important;
+  overflow-x: auto;
+}
+
+.blog-closing-thought {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #1f242d !important;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+/* ===================================
+   Blog List Page Styles
+   =================================== */
+.blog-list-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.blog-list-header {
+  margin-bottom: 3rem;
+}
+
+.blog-list-title {
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #1f242d !important;
+  margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.blog-list-desc {
+  font-family: 'Newsreader', 'Georgia', serif;
+  font-size: 1.2rem;
+  color: #6b7280 !important;
+}
+
+.blog-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.blog-card {
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.blog-card:last-child {
+  border-bottom: none;
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #6b7280 !important;
+  margin-bottom: 0.5rem;
+}
+
+.blog-card-id {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #eff6ff;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+}
+
+.blog-card-dot {
+  color: #9ca3af;
+}
+
+.blog-card-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.blog-card-title a {
+  color: #1f242d !important;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.blog-card-title a:hover {
+  color: #2563eb !important;
+}
+
+.blog-card-subtitle {
+  font-family: 'Newsreader', 'Georgia', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #6b7280 !important;
+  margin-bottom: 0.85rem;
+}
+
+.blog-card-excerpt {
+  font-family: 'Newsreader', 'Georgia', serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #52525b !important;
+  margin-bottom: 1.25rem;
+}
+
+.blog-read-more {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2563eb !important;
+  text-decoration: none;
+}
+
+.blog-read-more:hover {
+  text-decoration: underline;
+}
+
+/* ===================================
+   Footer
+   =================================== */
+.blog-footer {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 4rem;
+  padding: 2.5rem 1.5rem;
+}
+
+.blog-footer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #71717a !important;
+}
+
+@media (min-width: 640px) {
+  .blog-footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.blog-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.blog-footer-links a {
+  color: #71717a !important;
+  text-decoration: none;
+}
+
+.blog-footer-links a:hover {
+  color: #09090b !important;
+  text-decoration: underline;
+}
+
+/* Portfolio Button in 3D Mode */
+.portfolio-blog-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 200ms ease;
+}
+
+.portfolio-blog-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}

@@ -70,18 +70,14 @@ body {
   line-height: 1.6;
 }
 
+body.blog-mode {
+  background: #fafafa !important;
+  color: #18181b !important;
+  overflow-y: auto !important;
+}
+
 body::after {
-  content: "";
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200vw;
-  height: 200vh;
-  z-index: 2147483647;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px);
-  background-size: 3px 3px;
-  animation: safeNoiseMove 0.3s steps(3) infinite;
+  display: none !important;
 }
 
 @keyframes safeNoiseMove {
